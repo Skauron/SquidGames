@@ -29,6 +29,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera)
 	float CustomOffsetY = 500.0f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera)
+	float SpeedLerp = 3.0f;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

@@ -28,6 +28,8 @@ void ASquidGameState::BeginPlay()
     {
         Players.Add(Cast<AMySquidGameCharacter>(TempPlayerActor));
     }
+
+    PlayerController = GetWorld()->GetFirstPlayerController();
 }
 
 void ASquidGameState::Tick(float DeltaTime)
@@ -45,21 +47,22 @@ void ASquidGameState::Tick(float DeltaTime)
 
 void ASquidGameState::CheckGameState()
 {
+    check(PlayerController);
+
     int PlayersWithGoal = 0;
     int DeadPlayers = 0;
-    APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
 
-    for (AMySquidGameCharacter* Player : Players)
+    for (AMySquidGameCharacter *Player : Players)
     {
         if (Player)
         {
-            if (Player->GetIsDead()) 
+            if (Player->GetIsDead())
             {
                 DeadPlayers++;
             }
-            else 
+            else
             {
-                if (Player->GetReachGoal()) 
+                if (Player->GetReachGoal())
                 {
                     PlayersWithGoal++;
                 }
@@ -67,31 +70,21 @@ void ASquidGameState::CheckGameState()
         }
     }
 
-    
     // Case 1: ALL PLAYER WINS
     if (DeadPlayers == 0 && PlayersWithGoal == Players.Num())
     {
-        if (PlayerController)
-        {
-            PlayerController->GameHasEnded(nullptr, true);
-        }
+        PlayerController->GameHasEnded(nullptr, true);
     }
     // Case 2: ALL PLAYER DIES
     else if (DeadPlayers == Players.Num())
     {
-        if (PlayerController)
-        {
-            PlayerController->GameHasEnded(nullptr, false);
-        }
+        PlayerController->GameHasEnded(nullptr, false);
     }
     // Case 3: ONE PLAYER WIN AND THE OTHER DIES
     else if ((PlayersWithGoal + DeadPlayers) == Players.Num())
     {
-        if (PlayerController)
-        {
-            APawn* PlayerPawn = PlayerController->GetPawn();
-            PlayerController->GameHasEnded(PlayerPawn, true);
-        }
+        APawn *PlayerPawn = PlayerController->GetPawn();
+        PlayerController->GameHasEnded(PlayerPawn, true);
     }
 }
 

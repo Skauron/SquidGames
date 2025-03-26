@@ -42,4 +42,6 @@ private:
 	bool GameHasEnd = false;
 
 	float Countdown = 60.0f;
+
+	TObjectPtr<APlayerController> PlayerController;
 };

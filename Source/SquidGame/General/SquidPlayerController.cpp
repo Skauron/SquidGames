@@ -16,24 +16,18 @@ void ASquidPlayerController::BeginPlay()
     if (APlayerController *PlayerController = UGameplayStatics::GetPlayerController(this, 0))
     {
         SquidCharacterP1 = Cast<AMySquidGameCharacter>(PlayerController->GetPawn());
-        // SquidCharacterP1->SetPlayerIndex(0);
-        if (InputSubsystemP1 = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
-        {
-            // Add the mapping context so we get controls
-            InputSubsystemP1->AddMappingContext(SquidGameContextP1, 0);
-        }
     }
 
     // Get the enhanced input subsystem Player 2
     if (APlayerController *PlayerController2 = UGameplayStatics::GetPlayerController(this, 1))
     {
         SquidCharacterP2 = Cast<AMySquidGameCharacter>(PlayerController2->GetPawn());
-        // SquidCharacterP2->SetPlayerIndex(1);
-        if (InputSubsystemP2 = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
-        {
-            // Add the mapping context so we get controls
-            InputSubsystemP2->AddMappingContext(SquidGameContextP2, 0);
-        }
+    }
+
+    if (InputSubsystemP1 = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
+    {
+        // Add the mapping context so we get controls
+        InputSubsystemP1->AddMappingContext(SquidGameContextP1, 0);
     }
 }
 

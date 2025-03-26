@@ -36,7 +36,9 @@ void ASquidGameCameraActor::Tick(float DeltaTime)
 	{
 		NearTarget = CheckDistanceTargets();
 		FVector TargetLocation = ViewTargets[NearTarget]->GetActorLocation();
-		SetActorLocation(FVector(CurrentLocation.X, TargetLocation.Y + CustomOffsetY, CurrentLocation.Z));
+		FVector NewTargetLocation = FVector(CurrentLocation.X, TargetLocation.Y + CustomOffsetY, CurrentLocation.Z);
+		FVector NewLocation = FMath::VInterpTo(GetActorLocation(), NewTargetLocation, DeltaTime, SpeedLerp);
+		SetActorLocation(NewLocation);
 	}
 }
 

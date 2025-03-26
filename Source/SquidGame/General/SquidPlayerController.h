@@ -40,15 +40,9 @@ protected:
 	UPROPERTY()
 	TObjectPtr<UEnhancedInputLocalPlayerSubsystem> InputSubsystemP1;
 
-	UPROPERTY()
-	TObjectPtr<UEnhancedInputLocalPlayerSubsystem> InputSubsystemP2;
-
 	// Variables for the Input Actions
 	UPROPERTY(EditAnywhere, Category = Input)
 	TObjectPtr<UInputMappingContext> SquidGameContextP1;
-
-	UPROPERTY(EditAnywhere, Category = Input)
-	TObjectPtr<UInputMappingContext> SquidGameContextP2;
 
 	UPROPERTY(EditAnywhere, Category = Input)
 	TObjectPtr<UInputAction> MovementActionP1;
